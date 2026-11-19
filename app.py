@@ -1,4 +1,5 @@
 from flask import Flask
+from uuid import UUID
 
 app = Flask(__name__)
 
@@ -6,18 +7,26 @@ app = Flask(__name__)
 def home():
     return "home page hello flask"
 
-@app.route("/users")
-def users():
-    return "welcome to user page"
+@app.route("/user/<int:id>")
+def user(id):
+    return f"hello {id}"
 
-@app.route("/user/<name>")
-def user(name):
-    return f"hello {name}"
+@app.route("/price/<float:amount>")
+def price(amount):
+    return f"hello {amount}"
+
+@app.route("/stringsaccept/<string:any>")
+def stringsaccept(any):
+    return f"hello {any}"
 
 
-@app.route("/student/<name>/<course>")
-def student(name,course):
-    return f"{name} is learning {course}"
+@app.route("/files/<path:file_path>")
+def files(file_path):
+    return f"hello {file_path}"
+
+@app.route("/student/<uuid:user_id>")
+def student(user_id):
+    return f"hello {user_id}"
 
 if __name__ == "__main__":
     app.run(debug=True)
